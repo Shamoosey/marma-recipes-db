@@ -28,9 +28,9 @@ model Recipe {
   id             String @id @default(uuid())
   name           String
   description    String
-  servings       Int
-  prepTime       Int
-  cookTime       Int
+  servings       Int?
+  prepTime       Int?
+  cookTime       Int?
   ovenTemp       Int?
   updatedAt      DateTime @updatedAt
   createdAt      DateTime @default(now())
