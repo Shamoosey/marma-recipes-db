@@ -1,32 +1,43 @@
 import prisma from "../../../../prisma/client";
 import { RecipeCommentDto } from "../types/recipeCommentDto";
 import { RecipeDto } from "../types/recipeDto";
-import { formatRecipe } from "../utils/formatRecipe";
+
+const recipeInclude = {
+  ingredients: true,
+  steps: true,
+  user: true,
+  comments: {
+    include: {
+      user: true,
+    },
+  },
+};
+
+const formatRecipeData = (data: any): RecipeDto => {
+  return {
+    ...data,
+    steps: data.steps.map((x: any) => x.description),
+    ingredients: data.ingredients.map((x: any) => x.description),
+    comments: data.comments.map(
+      (x: any) =>
+        ({
+          id: x.id,
+          userId: x.userId,
+          username: x.user.username,
+          userProfileUrl: x.user.imageUrl,
+          text: x.text,
+          createdAt: x.createdAt,
+        } as RecipeCommentDto)
+    ),
+  } as RecipeDto;
+};
 
 export const fetchAllRecipes = async (): Promise<RecipeDto[]> => {
-  //Using include will also return the associated tables (RecipeSteps, RecipeIngreidents) when returning the recipe data
   const data = await prisma.recipe.findMany({
-    include: {
-      ingredients: true,
-      steps: true,
-      user: true,
-      comments: {
-        include: {
-          user: true,
-        },
-      },
-    },
+    include: recipeInclude,
   });
 
-  return data.map(
-    (x) =>
-      ({
-        ...x,
-        steps: x.steps.map((x) => x.description),
-        ingredients: x.ingredients.map((x) => x.description),
-        comments: x.comments.map((x) => ({ userId: x.userId, text: x.text, createdAt: x.createdAt, username: x.user.username, id: x.id } as RecipeCommentDto)),
-      } as RecipeDto)
-  );
+  return data.map(formatRecipeData);
 };
 
 export const fetchUserSavedRecipeIds = async (userId: string): Promise<string[]> => {
@@ -47,37 +58,18 @@ export const fetchUserSavedRecipeIds = async (userId: string): Promise<string[]>
 
 export const getRecipeById = async (id: string): Promise<RecipeDto | null> => {
   try {
-    //Find the recipe using the id passed in and return the entire object included  with RecipeSteps & RecipeIngredients
     const data = await prisma.recipe.findUnique({
       where: {
         id: id,
       },
-      include: {
-        ingredients: true,
-        steps: true,
-        user: true,
-        comments: {
-          include: {
-            user: true,
-          },
-        },
-      },
+      include: recipeInclude,
     });
 
     if (!data) {
       return null;
-    } else {
-      const formattedData = {
-        ...data,
-        steps: data.steps.map((x) => x.description),
-        ingredients: data.ingredients.map((x) => x.description),
-        comments: data.comments.map(
-          (x) => ({ userId: x.userId, text: x.text, createdAt: x.createdAt, username: x.user.username, id: x.id } as RecipeCommentDto)
-        ),
-      } as RecipeDto;
-
-      return formattedData;
     }
+
+    return formatRecipeData(data);
   } catch (error) {
     throw new Error(`Failed to fetch Recipe with id ${id}`);
   }
@@ -125,32 +117,15 @@ export const createRecipe = async (recipeDto: RecipeDto, user: string): Promise<
         },
       },
     },
-    include: {
-      ingredients: true,
-      steps: true,
-      user: true,
-      comments: {
-        include: {
-          user: true,
-        },
-      },
-    },
+    include: recipeInclude,
   });
 
-  const formattedData = {
-    ...data,
-    steps: data.steps.map((x) => x.description),
-    ingredients: data.ingredients.map((x) => x.description),
-    comments: data.comments.map((x) => ({ userId: x.userId, text: x.text, createdAt: x.createdAt, username: x.user.username, id: x.id } as RecipeCommentDto)),
-  } as RecipeDto;
-
-  return formattedData;
+  return formatRecipeData(data);
 };
 
 export const updateRecipe = async (id: string, recipeDto: RecipeDto): Promise<RecipeDto> => {
   const { ingredients, steps, comments, updatedAt, createdAt, ...recipeData } = recipeDto;
 
-  //During an recipe update we clear out the associated entries in the RecipeIngredients & RecipeSteps tables using deleteMany: {} and re-add the entries using createMany
   const data = await prisma.recipe.update({
     where: { id },
     data: {
@@ -168,26 +143,10 @@ export const updateRecipe = async (id: string, recipeDto: RecipeDto): Promise<Re
         },
       },
     },
-    include: {
-      ingredients: true,
-      steps: true,
-      user: true,
-      comments: {
-        include: {
-          user: true,
-        },
-      },
-    },
+    include: recipeInclude,
   });
 
-  const formattedData = {
-    ...data,
-    steps: data.steps.map((x) => x.description),
-    ingredients: data.ingredients.map((x) => x.description),
-    comments: data.comments.map((x) => ({ userId: x.userId, text: x.text, createdAt: x.createdAt, username: x.user.username, id: x.id } as RecipeCommentDto)),
-  } as RecipeDto;
-
-  return formattedData;
+  return formatRecipeData(data);
 };
 
 export const deleteRecipe = async (id: string): Promise<void> => {
@@ -207,13 +166,15 @@ export const createRecipeComment = async (userId: string, text: string, recipeId
     },
   });
 };
-export const deleteRecipeComment = async (id: string, userId: string) => {
+
+export const deleteRecipeComment = async (id: string, userId: string): Promise<void> => {
   const comment = await prisma.recipeComment.findFirst({
     where: {
       id: id,
       userId: userId,
     },
   });
+
   if (comment != undefined) {
     await prisma.recipeComment.delete({
       where: {
