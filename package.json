@@ -14,7 +14,7 @@
     "prisma:migrate": "prisma migrate deploy",
     "prisma:migrate:dev": "prisma migrate dev",
     "prisma:seed": "prisma db seed",
-    "vercel-build": "npm run prisma:generate && npm run build"
+    "vercel-build": "npm run prisma:generate && npm run prisma:migrate && npm run build"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
