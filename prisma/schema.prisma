@@ -35,6 +35,9 @@ model Recipe {
   ovenTemp       Int?
   updatedAt      DateTime @updatedAt
   createdAt      DateTime @default(now())
+
+  imageUrl       String?
+  cloudinaryId   String?
   
   recipeTypeId   String
   recipeType     RecipeType @relation(fields: [recipeTypeId], references: [id])

@@ -1,5 +1,5 @@
 import Joi from "joi";
-import { requiredArray, requiredNumber, requiredString } from "./validationHelper";
+import { requiredArray, requiredString } from "./validationHelper";
 
 export const recipeSchema = Joi.object({
   id: Joi.string().optional(),
@@ -13,4 +13,7 @@ export const recipeSchema = Joi.object({
   ingredients: requiredArray("ingredients"),
   steps: requiredArray("steps"),
   comments: Joi.array().optional(),
+  imageUrl: Joi.any().optional(),
+  cloudinaryId: Joi.any().optional(),
+  imageBase64: Joi.string().optional(),
 });

@@ -1,6 +1,7 @@
 import prisma from "../../../../prisma/client";
 import { RecipeCommentDto } from "../types/recipeCommentDto";
 import { RecipeDto } from "../types/recipeDto";
+import { CloudinaryService } from "./cloudinaryService";
 
 const recipeInclude = {
   ingredients: true,
@@ -11,6 +12,18 @@ const recipeInclude = {
       user: true,
     },
   },
+};
+
+const handleImageUpload = async (imageBase64?: string): Promise<{ imageUrl?: string; cloudinaryId?: string }> => {
+  if (!imageBase64) {
+    return {};
+  }
+
+  const result = await CloudinaryService.uploadImage(imageBase64, "recipes");
+  return {
+    imageUrl: result.secure_url,
+    cloudinaryId: result.public_id,
+  };
 };
 
 const formatRecipeData = (data: any): RecipeDto => {
@@ -99,13 +112,17 @@ export const toggleUserSavedRecipe = async (recipeId: string, userId: string): P
   }
 };
 
-export const createRecipe = async (recipeDto: RecipeDto, user: string): Promise<RecipeDto> => {
-  const { ingredients, steps, comments, updatedAt, createdAt, userId, ...recipeData } = recipeDto;
+export const createRecipe = async (recipeDto: RecipeDto, user: string, imageBase64?: string): Promise<RecipeDto> => {
+  const { ingredients, steps, comments, updatedAt, createdAt, userId, imageUrl, cloudinaryId, ...recipeData } = recipeDto;
+
+  const { imageUrl: uploadedImageUrl, cloudinaryId: uploadedCloudinaryId } = await handleImageUpload(imageBase64);
 
   const data = await prisma.recipe.create({
     data: {
       ...recipeData,
       userId: user,
+      imageUrl: uploadedImageUrl,
+      cloudinaryId: uploadedCloudinaryId,
       ingredients: {
         createMany: {
           data: ingredients.map((description) => ({ description })),
@@ -123,13 +140,28 @@ export const createRecipe = async (recipeDto: RecipeDto, user: string): Promise<
   return formatRecipeData(data);
 };
 
-export const updateRecipe = async (id: string, recipeDto: RecipeDto): Promise<RecipeDto> => {
-  const { ingredients, steps, comments, updatedAt, createdAt, ...recipeData } = recipeDto;
+export const updateRecipe = async (id: string, recipeDto: RecipeDto, imageBase64?: string): Promise<RecipeDto> => {
+  const { ingredients, steps, comments, updatedAt, createdAt, imageUrl, cloudinaryId, ...recipeData } = recipeDto;
 
+  const existingRecipe = await prisma.recipe.findUnique({ where: { id } });
+
+  let uploadedImageUrl = existingRecipe?.imageUrl;
+  let uploadedCloudinaryId = existingRecipe?.cloudinaryId;
+
+  if (imageBase64) {
+    if (existingRecipe?.cloudinaryId) {
+      await CloudinaryService.deleteImage(existingRecipe.cloudinaryId);
+    }
+    const result = await handleImageUpload(imageBase64);
+    uploadedImageUrl = result.imageUrl;
+    uploadedCloudinaryId = result.cloudinaryId;
+  }
   const data = await prisma.recipe.update({
     where: { id },
     data: {
       ...recipeData,
+      ...(uploadedImageUrl && { imageUrl: uploadedImageUrl }),
+      ...(uploadedCloudinaryId && { cloudinaryId: uploadedCloudinaryId }),
       ingredients: {
         deleteMany: {},
         createMany: {
@@ -150,36 +182,15 @@ export const updateRecipe = async (id: string, recipeDto: RecipeDto): Promise<Re
 };
 
 export const deleteRecipe = async (id: string): Promise<void> => {
+  const existingRecipe = await prisma.recipe.findUnique({ where: { id } });
+
+  if (existingRecipe?.cloudinaryId) {
+    await CloudinaryService.deleteImage(existingRecipe.cloudinaryId);
+  }
+
   await prisma.recipe.delete({
     where: {
       id: id,
     },
   });
-};
-
-export const createRecipeComment = async (userId: string, text: string, recipeId: string): Promise<void> => {
-  await prisma.recipeComment.create({
-    data: {
-      text,
-      userId,
-      recipeId,
-    },
-  });
-};
-
-export const deleteRecipeComment = async (id: string, userId: string): Promise<void> => {
-  const comment = await prisma.recipeComment.findFirst({
-    where: {
-      id: id,
-      userId: userId,
-    },
-  });
-
-  if (comment != undefined) {
-    await prisma.recipeComment.delete({
-      where: {
-        id: id,
-      },
-    });
-  }
 };
