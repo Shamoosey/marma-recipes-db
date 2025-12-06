@@ -6,6 +6,9 @@ export interface RecipeDto {
   description: string;
   recipeTypeId: string;
 
+  imageUrl?: string;
+  cloudinaryId?: string;
+
   ingredients: string[];
   steps: string[];
 

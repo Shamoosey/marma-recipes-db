@@ -6,12 +6,13 @@ import corsOptions from "./config/cors";
 import { useExpressServer } from "routing-controllers";
 import { RecipeController } from "./api/v1/controllers/recipeController";
 import { RecipeTypeController } from "./api/v1/controllers/recipeTypeController";
-import { clerkMiddleware, requireAuth } from "@clerk/express";
+import { RecipeCommentController } from "./api/v1/controllers/recipeCommentController";
+import { clerkMiddleware } from "@clerk/express";
 
 const app: Express = express();
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ limit: "10mb", extended: true }));
 app.use(morgan("combined"));
 
 app.use(clerkMiddleware());
@@ -19,7 +20,7 @@ app.use(clerkMiddleware());
 // setup the controllers and use the /api/v1 prefix for the routes
 useExpressServer(app, {
   routePrefix: "/api/v1",
-  controllers: [RecipeController, RecipeTypeController],
+  controllers: [RecipeController, RecipeTypeController, RecipeCommentController],
   cors: corsOptions,
   defaultErrorHandler: false,
 });
