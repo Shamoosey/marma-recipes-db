@@ -145,13 +145,13 @@ export const updateRecipe = async (id: string, recipeDto: RecipeDto, imageBase64
 
   const existingRecipe = await prisma.recipe.findUnique({ where: { id } });
 
-  let uploadedImageUrl = existingRecipe?.imageUrl;
+  let uploadedImageUrl = imageUrl;
   let uploadedCloudinaryId = existingRecipe?.cloudinaryId;
 
+  if (existingRecipe?.cloudinaryId && !imageUrl) {
+    await CloudinaryService.deleteImage(existingRecipe.cloudinaryId);
+  }
   if (imageBase64) {
-    if (existingRecipe?.cloudinaryId) {
-      await CloudinaryService.deleteImage(existingRecipe.cloudinaryId);
-    }
     const result = await handleImageUpload(imageBase64);
     uploadedImageUrl = result.imageUrl;
     uploadedCloudinaryId = result.cloudinaryId;
@@ -160,8 +160,8 @@ export const updateRecipe = async (id: string, recipeDto: RecipeDto, imageBase64
     where: { id },
     data: {
       ...recipeData,
-      ...(uploadedImageUrl && { imageUrl: uploadedImageUrl }),
       ...(uploadedCloudinaryId && { cloudinaryId: uploadedCloudinaryId }),
+      imageUrl: uploadedImageUrl ?? null,
       ingredients: {
         deleteMany: {},
         createMany: {
