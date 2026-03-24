@@ -2,6 +2,7 @@ import prisma from "../../../../prisma/client";
 import { RecipeCommentDto } from "../types/recipeCommentDto";
 import { RecipeDto } from "../types/recipeDto";
 import { CloudinaryService } from "./cloudinaryService";
+import { sendRecipeWebhook } from "./webhookService";
 
 const recipeInclude = {
   ingredients: true,
@@ -145,10 +146,13 @@ export const createRecipe = async (
         },
       },
     },
-    include: recipeInclude,
+    include: { ...recipeInclude, recipeType: true },
   });
 
-  return formatRecipeData(data);
+  const recipe = formatRecipeData(data);
+  const recipeType = data.recipeType.name;
+  await sendRecipeWebhook(recipe, recipeType, "A New Recipe Has Been Created!");
+  return recipe;
 };
 
 export const updateRecipe = async (id: string, recipeDto: RecipeDto, imageBase64?: string): Promise<RecipeDto> => {
