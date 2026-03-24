@@ -9,6 +9,7 @@ export async function sendRecipeWebhook(recipe: RecipeDto, recipeType: string, m
 
   const embed: Record<string, unknown> = {
     title: message,
+    url: `${process.env.FRONTEND_URL}/recipes/${recipe.id}`,
     color: 0xf97316,
     fields: [
       { name: "Title", value: recipe.name, inline: true },
