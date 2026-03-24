@@ -1,6 +1,10 @@
 import { RecipeDto } from "../types/recipeDto";
 
-export async function sendRecipeWebhook(recipe: RecipeDto, recipeType: string, message: string): Promise<void> {
+export async function sendRecipeWebhook(
+  recipe: RecipeDto,
+  recipeType: string,
+  type: "update" | "create",
+): Promise<void> {
   const maxDescriptionLength = 200;
   const truncatedDescription =
     recipe.description.length > maxDescriptionLength
@@ -8,7 +12,7 @@ export async function sendRecipeWebhook(recipe: RecipeDto, recipeType: string, m
       : recipe.description;
 
   const embed: Record<string, unknown> = {
-    title: message,
+    title: `A Recipe has been ${type == "create" ? "Created" : "Updated"}.`,
     url: `${process.env.FRONTEND_URL}/recipes/${recipe.id}`,
     color: 0xf97316,
     fields: [
@@ -18,7 +22,7 @@ export async function sendRecipeWebhook(recipe: RecipeDto, recipeType: string, m
       { name: "Description", value: truncatedDescription, inline: false },
     ],
     timestamp: new Date(recipe.createdAt).toISOString(),
-    footer: { text: "Recipe created" },
+    footer: { text: `Recipe ${type}d` },
   };
 
   if (recipe.imageUrl) {
