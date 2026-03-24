@@ -82,8 +82,8 @@ export class RecipeController {
         return res.status(403).json(errorResponse("Unauthorized"));
       }
 
-      const { imageBase64, ...recipeData } = req.body;
-      const newRecipe = await RecipeService.createRecipe(recipeData, user.id, imageBase64);
+      const { imageBase64, sendNotification, ...recipeData } = req.body;
+      const newRecipe = await RecipeService.createRecipe(recipeData, user.id, imageBase64, sendNotification);
 
       return res.status(201).json(successResponse(newRecipe, "Recipe created successfully"));
     } catch (error) {
@@ -101,8 +101,8 @@ export class RecipeController {
       if (recipe?.userId != userId) {
         return res.status(403).json(errorResponse("Unauthorized"));
       } else {
-        const { imageBase64, ...recipeData } = req.body;
-        const updatedRecipe = await RecipeService.updateRecipe(id, recipeData, imageBase64);
+        const { imageBase64, sendNotification, ...recipeData } = req.body;
+        const updatedRecipe = await RecipeService.updateRecipe(id, recipeData, imageBase64, sendNotification);
         return res.status(201).json(successResponse(updatedRecipe, "Recipe updated successfully"));
       }
     } catch (error) {
