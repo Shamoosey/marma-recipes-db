@@ -7,6 +7,7 @@ const recipeInclude = {
   ingredients: true,
   steps: true,
   user: true,
+  userSavedRecipes: true,
   comments: {
     include: {
       user: true,
@@ -31,6 +32,7 @@ const formatRecipeData = (data: any): RecipeDto => {
     ...data,
     steps: data.steps.map((x: any) => x.description),
     ingredients: data.ingredients.map((x: any) => x.description),
+    likeCount: data.userSavedRecipes.length,
     comments: data.comments.map(
       (x: any) =>
         ({
@@ -40,14 +42,16 @@ const formatRecipeData = (data: any): RecipeDto => {
           userProfileUrl: x.user.imageUrl,
           text: x.text,
           createdAt: x.createdAt,
-        } as RecipeCommentDto)
+        }) as RecipeCommentDto,
     ),
   } as RecipeDto;
 };
 
 export const fetchAllRecipes = async (): Promise<RecipeDto[]> => {
   const data = await prisma.recipe.findMany({
-    include: recipeInclude,
+    include: {
+      ...recipeInclude,
+    },
   });
 
   return data.map(formatRecipeData);
@@ -75,7 +79,9 @@ export const getRecipeById = async (id: string): Promise<RecipeDto | null> => {
       where: {
         id: id,
       },
-      include: recipeInclude,
+      include: {
+        ...recipeInclude,
+      },
     });
 
     if (!data) {
@@ -112,15 +118,20 @@ export const toggleUserSavedRecipe = async (recipeId: string, userId: string): P
   }
 };
 
-export const createRecipe = async (recipeDto: RecipeDto, user: string, imageBase64?: string): Promise<RecipeDto> => {
-  const { ingredients, steps, comments, updatedAt, createdAt, userId, imageUrl, cloudinaryId, ...recipeData } = recipeDto;
+export const createRecipe = async (
+  recipeDto: RecipeDto,
+  createUserId: string,
+  imageBase64?: string,
+): Promise<RecipeDto> => {
+  const { ingredients, steps, comments, updatedAt, createdAt, userId, user, imageUrl, cloudinaryId, ...recipeData } =
+    recipeDto;
 
   const { imageUrl: uploadedImageUrl, cloudinaryId: uploadedCloudinaryId } = await handleImageUpload(imageBase64);
 
   const data = await prisma.recipe.create({
     data: {
       ...recipeData,
-      userId: user,
+      userId: createUserId,
       imageUrl: uploadedImageUrl,
       cloudinaryId: uploadedCloudinaryId,
       ingredients: {
@@ -141,7 +152,7 @@ export const createRecipe = async (recipeDto: RecipeDto, user: string, imageBase
 };
 
 export const updateRecipe = async (id: string, recipeDto: RecipeDto, imageBase64?: string): Promise<RecipeDto> => {
-  const { ingredients, steps, comments, updatedAt, createdAt, imageUrl, cloudinaryId, ...recipeData } = recipeDto;
+  const { ingredients, steps, comments, updatedAt, createdAt, imageUrl, user, cloudinaryId, ...recipeData } = recipeDto;
 
   const existingRecipe = await prisma.recipe.findUnique({ where: { id } });
 
