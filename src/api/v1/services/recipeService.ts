@@ -155,7 +155,7 @@ export const createRecipe = async (
   const recipe = formatRecipeData(data);
   if (sendNotification) {
     const recipeType = data.recipeType.name;
-    await sendRecipeWebhook(recipe, recipeType, "A New Recipe Has Been Created!");
+    await sendRecipeWebhook(recipe, recipeType, "create");
   }
   return recipe;
 };
@@ -207,7 +207,7 @@ export const updateRecipe = async (
   const recipe = formatRecipeData(updatedRecipe);
   if (sendNotification) {
     const recipeType = data.recipeType.name;
-    await sendRecipeWebhook(recipe, recipeType, "A Recipe Has Been Update!");
+    await sendRecipeWebhook(recipe, recipeType, "update");
   }
   return recipe;
 };
