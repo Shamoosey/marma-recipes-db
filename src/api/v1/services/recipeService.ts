@@ -29,8 +29,10 @@ const handleImageUpload = async (imageBase64?: string): Promise<{ imageUrl?: str
 };
 
 const formatRecipeData = (data: any): RecipeDto => {
+  const { userSavedRecipes, ...recipeData } = data;
+
   return {
-    ...data,
+    ...recipeData,
     steps: data.steps.map((x: any) => x.description),
     ingredients: data.ingredients.map((x: any) => x.description),
     likeCount: data.userSavedRecipes.length,
@@ -123,6 +125,7 @@ export const createRecipe = async (
   recipeDto: RecipeDto,
   createUserId: string,
   imageBase64?: string,
+  sendNotification?: boolean,
 ): Promise<RecipeDto> => {
   const { ingredients, steps, comments, updatedAt, createdAt, userId, user, imageUrl, cloudinaryId, ...recipeData } =
     recipeDto;
@@ -150,13 +153,21 @@ export const createRecipe = async (
   });
 
   const recipe = formatRecipeData(data);
-  const recipeType = data.recipeType.name;
-  await sendRecipeWebhook(recipe, recipeType, "A New Recipe Has Been Created!");
+  if (sendNotification) {
+    const recipeType = data.recipeType.name;
+    await sendRecipeWebhook(recipe, recipeType, "A New Recipe Has Been Created!");
+  }
   return recipe;
 };
 
-export const updateRecipe = async (id: string, recipeDto: RecipeDto, imageBase64?: string): Promise<RecipeDto> => {
-  const { ingredients, steps, comments, updatedAt, createdAt, imageUrl, user, cloudinaryId, ...recipeData } = recipeDto;
+export const updateRecipe = async (
+  id: string,
+  recipeDto: RecipeDto,
+  imageBase64?: string,
+  sendNotification?: boolean,
+): Promise<RecipeDto> => {
+  const { ingredients, steps, comments, updatedAt, likeCount, createdAt, imageUrl, user, cloudinaryId, ...recipeData } =
+    recipeDto;
 
   const existingRecipe = await prisma.recipe.findUnique({ where: { id } });
 
@@ -190,10 +201,15 @@ export const updateRecipe = async (id: string, recipeDto: RecipeDto, imageBase64
         },
       },
     },
-    include: recipeInclude,
+    include: { ...recipeInclude, recipeType: true },
   });
-
-  return formatRecipeData(data);
+  const { recipeType, ...updatedRecipe } = data;
+  const recipe = formatRecipeData(updatedRecipe);
+  if (sendNotification) {
+    const recipeType = data.recipeType.name;
+    await sendRecipeWebhook(recipe, recipeType, "A Recipe Has Been Update!");
+  }
+  return recipe;
 };
 
 export const deleteRecipe = async (id: string): Promise<void> => {
