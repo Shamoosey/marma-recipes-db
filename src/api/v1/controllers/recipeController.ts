@@ -8,7 +8,6 @@ import { validateRequest } from "../middleware/validate";
 import { getAuth, requireAuth } from "@clerk/express";
 import * as UserService from "../services/userService";
 import { findOrUpsertUser } from "../middleware/findOrUpsertUser";
-import { upload } from "../middleware/fileUpload";
 
 @Controller()
 @UseBefore(requireAuth(), findOrUpsertUser)
