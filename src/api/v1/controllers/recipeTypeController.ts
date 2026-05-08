@@ -2,13 +2,9 @@ import "reflect-metadata";
 import { Request, Response } from "express";
 import * as RecipeTypeService from "../services/recipeTypeService";
 import { successResponse } from "../models/responseModel";
-import { Controller, Delete, Get, Param, Post, Put, Req, Res, UseBefore } from "routing-controllers";
-import { validateRequest } from "../middleware/validate";
-import { recipeTypeSchema } from "../validations/recipeTypeValidation";
-import { requireAuth } from "@clerk/express";
+import { Controller, Get, Req, Res } from "routing-controllers";
 
 @Controller()
-@UseBefore(requireAuth())
 export class RecipeTypeController {
   @Get("/recipeTypes")
   async getAll(@Req() req: Request, @Res() res: Response) {
