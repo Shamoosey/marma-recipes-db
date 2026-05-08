@@ -10,7 +10,6 @@ import * as UserService from "../services/userService";
 import { findOrUpsertUser } from "../middleware/findOrUpsertUser";
 
 @Controller()
-@UseBefore(requireAuth(), findOrUpsertUser)
 export class RecipeController {
   @Get("/recipes")
   async getAll(@Req() req: Request, @Res() res: Response) {
@@ -37,6 +36,7 @@ export class RecipeController {
   }
 
   @Get("/user-saved-recipes")
+  @UseBefore(requireAuth(), findOrUpsertUser)
   async getAllUserSavedRecipes(@Req() req: Request, @Res() res: Response) {
     try {
       const auth = getAuth(req);
@@ -53,6 +53,7 @@ export class RecipeController {
   }
 
   @Post("/user-saved-recipes/:id")
+  @UseBefore(requireAuth(), findOrUpsertUser)
   async toggleUserSavedRecipe(@Param("id") id: string, @Req() req: Request, @Res() res: Response) {
     try {
       const auth = getAuth(req);
@@ -70,7 +71,7 @@ export class RecipeController {
   }
 
   @Post("/recipes")
-  @UseBefore(validateRequest(recipeSchema))
+  @UseBefore(requireAuth(), findOrUpsertUser, validateRequest(recipeSchema))
   async createRecipe(@Req() req: Request, @Res() res: Response) {
     try {
       const auth = getAuth(req);
@@ -91,7 +92,7 @@ export class RecipeController {
   }
 
   @Put("/recipes/:id")
-  @UseBefore(validateRequest(recipeSchema))
+  @UseBefore(requireAuth(), findOrUpsertUser, validateRequest(recipeSchema))
   async updateRecipe(@Param("id") id: string, @Req() req: Request, @Res() res: Response) {
     try {
       const auth = getAuth(req);
@@ -110,6 +111,7 @@ export class RecipeController {
   }
 
   @Delete("/recipes/:id")
+  @UseBefore(requireAuth(), findOrUpsertUser)
   async deleteRecipe(@Param("id") id: string, @Req() req: Request, @Res() res: Response) {
     try {
       const auth = getAuth(req);
