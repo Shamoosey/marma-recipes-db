@@ -12,12 +12,17 @@ export interface CloudinaryUploadResult {
 }
 
 export class CloudinaryService {
-  static async uploadImage(imageBase64: string, folder: string = "recipes"): Promise<CloudinaryUploadResult> {
+  static async uploadImage(
+    imageBase64: string,
+    folder: string = "recipes",
+    publicId?: string,
+  ): Promise<CloudinaryUploadResult> {
     try {
       const result = await cloudinary.uploader.upload(imageBase64, {
         folder: folder,
         resource_type: "auto",
         transformation: [{ width: 1000, height: 1000, crop: "limit" }, { quality: "auto" }],
+        ...(publicId && { public_id: publicId, overwrite: true }),
       });
 
       return result;

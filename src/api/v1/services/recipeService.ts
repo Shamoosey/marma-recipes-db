@@ -16,12 +16,15 @@ const recipeInclude = {
   },
 };
 
-const handleImageUpload = async (imageBase64?: string): Promise<{ imageUrl?: string; cloudinaryId?: string }> => {
+const handleImageUpload = async (
+  imageBase64?: string,
+  publicId?: string,
+): Promise<{ imageUrl?: string; cloudinaryId?: string }> => {
   if (!imageBase64) {
     return {};
   }
 
-  const result = await CloudinaryService.uploadImage(imageBase64, "recipes");
+  const result = await CloudinaryService.uploadImage(imageBase64, "recipes", publicId);
   return {
     imageUrl: result.secure_url,
     cloudinaryId: result.public_id,
@@ -130,7 +133,10 @@ export const createRecipe = async (
   const { ingredients, steps, comments, updatedAt, createdAt, userId, user, imageUrl, cloudinaryId, ...recipeData } =
     recipeDto;
 
-  const { imageUrl: uploadedImageUrl, cloudinaryId: uploadedCloudinaryId } = await handleImageUpload(imageBase64);
+  const { imageUrl: uploadedImageUrl, cloudinaryId: uploadedCloudinaryId } = await handleImageUpload(
+    imageBase64,
+    cloudinaryId,
+  );
 
   const data = await prisma.recipe.create({
     data: {
@@ -174,11 +180,8 @@ export const updateRecipe = async (
   let uploadedImageUrl = imageUrl;
   let uploadedCloudinaryId = existingRecipe?.cloudinaryId;
 
-  if (existingRecipe?.cloudinaryId && !imageUrl) {
-    await CloudinaryService.deleteImage(existingRecipe.cloudinaryId);
-  }
   if (imageBase64) {
-    const result = await handleImageUpload(imageBase64);
+    const result = await handleImageUpload(imageBase64, cloudinaryId);
     uploadedImageUrl = result.imageUrl;
     uploadedCloudinaryId = result.cloudinaryId;
   }
