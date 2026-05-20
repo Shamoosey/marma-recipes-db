@@ -5,13 +5,13 @@
 
 */
 -- DropForeignKey
-ALTER TABLE "recipe-tracker"."UserSavedRecipes" DROP CONSTRAINT "UserSavedRecipes_recipeId_fkey";
+ALTER TABLE "UserSavedRecipes" DROP CONSTRAINT "UserSavedRecipes_recipeId_fkey";
 
 -- DropForeignKey
-ALTER TABLE "recipe-tracker"."UserSavedRecipes" DROP CONSTRAINT "UserSavedRecipes_userId_fkey";
+ALTER TABLE "UserSavedRecipes" DROP CONSTRAINT "UserSavedRecipes_userId_fkey";
 
 -- DropTable
-DROP TABLE "recipe-tracker"."UserSavedRecipes";
+DROP TABLE "UserSavedRecipes";
 
 -- CreateTable
 CREATE TABLE "UserSavedRecipe" (
