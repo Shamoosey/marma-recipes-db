@@ -8,7 +8,7 @@ import { RecipeController } from "./api/v1/controllers/recipeController";
 import { RecipeTypeController } from "./api/v1/controllers/recipeTypeController";
 import { RecipeCommentController } from "./api/v1/controllers/recipeCommentController";
 import { clerkMiddleware } from "@clerk/express";
-import { UploadController } from "./api/v1/controllers/UploadController";
+import { UploadController } from "./api/v1/controllers/uploadController";
 
 const app: Express = express();
 
