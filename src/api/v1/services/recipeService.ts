@@ -2,7 +2,6 @@ import prisma from "../../../../prisma/client";
 import { RecipeCommentDto } from "../types/recipeCommentDto";
 import { RecipeDto } from "../types/recipeDto";
 import { CloudinaryService } from "./cloudinaryService";
-import { sendRecipeWebhook } from "./webhookService";
 
 const recipeInclude = {
   ingredients: true,
@@ -128,7 +127,6 @@ export const createRecipe = async (
   recipeDto: RecipeDto,
   createUserId: string,
   imageBase64?: string,
-  sendNotification?: boolean,
 ): Promise<RecipeDto> => {
   const { ingredients, steps, comments, updatedAt, createdAt, userId, user, imageUrl, cloudinaryId, ...recipeData } =
     recipeDto;
@@ -157,21 +155,11 @@ export const createRecipe = async (
     },
     include: { ...recipeInclude, recipeType: true },
   });
-
   const recipe = formatRecipeData(data);
-  if (sendNotification) {
-    const recipeType = data.recipeType.name;
-    await sendRecipeWebhook(recipe, recipeType, "create");
-  }
   return recipe;
 };
 
-export const updateRecipe = async (
-  id: string,
-  recipeDto: RecipeDto,
-  imageBase64?: string,
-  sendNotification?: boolean,
-): Promise<RecipeDto> => {
+export const updateRecipe = async (id: string, recipeDto: RecipeDto, imageBase64?: string): Promise<RecipeDto> => {
   const { ingredients, steps, comments, updatedAt, likeCount, createdAt, imageUrl, user, cloudinaryId, ...recipeData } =
     recipeDto;
 
@@ -208,10 +196,6 @@ export const updateRecipe = async (
   });
   const { recipeType, ...updatedRecipe } = data;
   const recipe = formatRecipeData(updatedRecipe);
-  if (sendNotification) {
-    const recipeType = data.recipeType.name;
-    await sendRecipeWebhook(recipe, recipeType, "update");
-  }
   return recipe;
 };
 

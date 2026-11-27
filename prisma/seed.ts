@@ -125,7 +125,8 @@ async function seedData() {
       steps: {
         create: [
           {
-            description: "Preheat your oven to 375°F (190°C) and line two large baking sheets with parchment paper or silicone baking mats.",
+            description:
+              "Preheat your oven to 375°F (190°C) and line two large baking sheets with parchment paper or silicone baking mats.",
           },
           {
             description:
@@ -140,7 +141,8 @@ async function seedData() {
               "In a separate bowl, whisk together the flour, baking soda, and salt. Gradually add the dry ingredients to the wet ingredients, mixing on low speed until just combined. Don't overmix.",
           },
           {
-            description: "Gently fold in the chocolate chips using a wooden spoon or spatula, distributing them evenly throughout the dough.",
+            description:
+              "Gently fold in the chocolate chips using a wooden spoon or spatula, distributing them evenly throughout the dough.",
           },
           {
             description:
@@ -151,7 +153,8 @@ async function seedData() {
               "Bake for 9-11 minutes until the edges are golden brown but the centers still look slightly underbaked. The cookies will continue cooking on the hot pan after removal.",
           },
           {
-            description: "Let cookies cool on the baking sheet for 5 minutes before transferring to a wire rack to cool completely.",
+            description:
+              "Let cookies cool on the baking sheet for 5 minutes before transferring to a wire rack to cool completely.",
           },
         ],
       },
@@ -189,7 +192,8 @@ async function seedData() {
               "Remove chicken from refrigerator 15 minutes before cooking to bring to room temperature. Pat dry with paper towels and season both sides generously with salt, pepper, garlic powder, and paprika.",
           },
           {
-            description: "Preheat grill or grill pan to medium-high heat. Brush chicken breasts with olive oil to prevent sticking.",
+            description:
+              "Preheat grill or grill pan to medium-high heat. Brush chicken breasts with olive oil to prevent sticking.",
           },
           {
             description:
@@ -200,10 +204,12 @@ async function seedData() {
               "Transfer chicken to a cutting board and let rest for 5 minutes to allow juices to redistribute, then slice diagonally into ½-inch thick strips.",
           },
           {
-            description: "While chicken rests, wash and thoroughly dry the romaine lettuce, then chop into bite-sized pieces and place in a large salad bowl.",
+            description:
+              "While chicken rests, wash and thoroughly dry the romaine lettuce, then chop into bite-sized pieces and place in a large salad bowl.",
           },
           {
-            description: "Drizzle the caesar dressing over the lettuce and toss well to coat every leaf. Add half the Parmesan cheese and toss again.",
+            description:
+              "Drizzle the caesar dressing over the lettuce and toss well to coat every leaf. Add half the Parmesan cheese and toss again.",
           },
           {
             description:
@@ -246,13 +252,16 @@ async function seedData() {
             description: "In a separate bowl, beat eggs then whisk in buttermilk, melted butter, and vanilla extract.",
           },
           {
-            description: "Pour wet ingredients into dry ingredients and stir until just combined. Don't overmix - lumps are okay.",
+            description:
+              "Pour wet ingredients into dry ingredients and stir until just combined. Don't overmix - lumps are okay.",
           },
           {
-            description: "Heat a griddle or large skillet over medium heat and lightly grease with butter or cooking spray.",
+            description:
+              "Heat a griddle or large skillet over medium heat and lightly grease with butter or cooking spray.",
           },
           {
-            description: "Pour ¼ cup of batter onto the griddle for each pancake. Cook until bubbles form on surface and edges look dry, about 2-3 minutes.",
+            description:
+              "Pour ¼ cup of batter onto the griddle for each pancake. Cook until bubbles form on surface and edges look dry, about 2-3 minutes.",
           },
           {
             description: "Flip and cook for another 2-3 minutes until golden brown and cooked through.",
@@ -302,13 +311,16 @@ async function seedData() {
             description: "Slice fresh mozzarella into 1/4-inch thick rounds, similar in size to the tomato slices.",
           },
           {
-            description: "On a large platter or individual plates, alternate slices of tomato and mozzarella in an overlapping pattern.",
+            description:
+              "On a large platter or individual plates, alternate slices of tomato and mozzarella in an overlapping pattern.",
           },
           {
-            description: "Tuck fresh basil leaves between and around the tomato and mozzarella slices for color and aroma.",
+            description:
+              "Tuck fresh basil leaves between and around the tomato and mozzarella slices for color and aroma.",
           },
           {
-            description: "Drizzle the extra virgin olive oil evenly over the entire salad, allowing it to pool slightly.",
+            description:
+              "Drizzle the extra virgin olive oil evenly over the entire salad, allowing it to pool slightly.",
           },
           {
             description: "Follow with a light drizzle of balsamic glaze in a decorative pattern.",
@@ -317,7 +329,8 @@ async function seedData() {
             description: "Finish with a sprinkle of sea salt and freshly cracked black pepper to taste.",
           },
           {
-            description: "Let the salad sit at room temperature for 15-20 minutes before serving to allow flavors to meld.",
+            description:
+              "Let the salad sit at room temperature for 15-20 minutes before serving to allow flavors to meld.",
           },
           { description: "Serve with crusty Italian bread for a complete light meal." },
         ],
@@ -359,10 +372,12 @@ async function seedData() {
               "Place whole chicken in a large pot with water and bay leaves. Bring to a boil, then reduce heat and simmer for 1 hour until chicken is tender.",
           },
           {
-            description: "Remove chicken from pot and let cool. Strain the broth through a fine-mesh sieve and return to pot. Discard solids.",
+            description:
+              "Remove chicken from pot and let cool. Strain the broth through a fine-mesh sieve and return to pot. Discard solids.",
           },
           {
-            description: "When chicken is cool enough to handle, remove and discard skin and bones. Shred meat into bite-sized pieces and set aside.",
+            description:
+              "When chicken is cool enough to handle, remove and discard skin and bones. Shred meat into bite-sized pieces and set aside.",
           },
           {
             description:
@@ -384,7 +399,8 @@ async function seedData() {
             description: "Season with salt and pepper to taste. Remove bay leaves if any remain.",
           },
           {
-            description: "Ladle into bowls and garnish with fresh chopped parsley. Serve hot with crackers or crusty bread.",
+            description:
+              "Ladle into bowls and garnish with fresh chopped parsley. Serve hot with crackers or crusty bread.",
           },
         ],
       },
@@ -419,14 +435,16 @@ async function seedData() {
             description: "Preheat oven to 425°F (220°C) and line a baking sheet with parchment paper.",
           },
           {
-            description: "Using a sharp serrated knife, slice the French bread loaf in half lengthwise, creating two long pieces.",
+            description:
+              "Using a sharp serrated knife, slice the French bread loaf in half lengthwise, creating two long pieces.",
           },
           {
             description:
               "In a medium bowl, combine softened butter, minced garlic, chopped parsley, salt, and red pepper flakes if using. Mix until well combined and creamy.",
           },
           {
-            description: "Spread the garlic butter mixture evenly over both cut sides of the bread, making sure to reach all the way to the edges.",
+            description:
+              "Spread the garlic butter mixture evenly over both cut sides of the bread, making sure to reach all the way to the edges.",
           },
           {
             description: "Sprinkle grated Parmesan cheese evenly over the buttered surfaces.",
@@ -436,10 +454,12 @@ async function seedData() {
             description: "Bake for 10-12 minutes until edges are golden brown and the surface is bubbly and fragrant.",
           },
           {
-            description: "For extra crispiness, broil for 1-2 minutes at the end, watching carefully to prevent burning.",
+            description:
+              "For extra crispiness, broil for 1-2 minutes at the end, watching carefully to prevent burning.",
           },
           {
-            description: "Remove from oven and let cool for 2-3 minutes before slicing into individual portions with a sharp knife.",
+            description:
+              "Remove from oven and let cool for 2-3 minutes before slicing into individual portions with a sharp knife.",
           },
           {
             description: "Serve immediately while hot and crispy for the best texture and flavor.",
@@ -496,7 +516,8 @@ async function seedData() {
               "Stir in chili powder, cumin, paprika, oregano, salt, black pepper, and cayenne pepper. Cook for 1-2 minutes until spices are aromatic.",
           },
           {
-            description: "Pour in beef broth and simmer for 5-7 minutes, stirring occasionally, until liquid has mostly evaporated and flavors have melded.",
+            description:
+              "Pour in beef broth and simmer for 5-7 minutes, stirring occasionally, until liquid has mostly evaporated and flavors have melded.",
           },
           {
             description: "Taste and adjust seasoning with additional salt, pepper, or spices as needed.",
@@ -507,10 +528,12 @@ async function seedData() {
           },
           { description: "Keep tortillas warm by wrapping in a clean kitchen towel." },
           {
-            description: "Prepare all toppings by dicing tomatoes, shredding lettuce and cheese, and arranging in serving bowls.",
+            description:
+              "Prepare all toppings by dicing tomatoes, shredding lettuce and cheese, and arranging in serving bowls.",
           },
           {
-            description: "Serve the seasoned beef with warm tortillas and all desired toppings, allowing everyone to build their own tacos.",
+            description:
+              "Serve the seasoned beef with warm tortillas and all desired toppings, allowing everyone to build their own tacos.",
           },
           {
             description: "Provide lime wedges for squeezing over finished tacos for extra brightness and flavor.",
@@ -550,7 +573,8 @@ async function seedData() {
       steps: {
         create: [
           {
-            description: "Preheat oven to 425°F (220°C). Roll out bottom pie crust and place in a 9-inch pie dish, trimming edges to 1-inch overhang.",
+            description:
+              "Preheat oven to 425°F (220°C). Roll out bottom pie crust and place in a 9-inch pie dish, trimming edges to 1-inch overhang.",
           },
           {
             description:
@@ -560,25 +584,30 @@ async function seedData() {
             description: "Let the apple mixture sit for 15 minutes to allow juices to develop, then toss again.",
           },
           {
-            description: "Arrange the seasoned apples in the prepared pie crust, mounding them slightly in the center. Dot with small pieces of butter.",
+            description:
+              "Arrange the seasoned apples in the prepared pie crust, mounding them slightly in the center. Dot with small pieces of butter.",
           },
           {
-            description: "Roll out the top pie crust and place over the filling. Trim to 1-inch overhang and crimp edges to seal.",
+            description:
+              "Roll out the top pie crust and place over the filling. Trim to 1-inch overhang and crimp edges to seal.",
           },
           {
             description: "Cut 4-5 small slits in the top crust to allow steam to escape during baking.",
           },
           {
-            description: "Brush the top crust with beaten egg and sprinkle with coarse sugar for a golden, sparkly finish.",
+            description:
+              "Brush the top crust with beaten egg and sprinkle with coarse sugar for a golden, sparkly finish.",
           },
           {
             description: "Place pie on a baking sheet to catch any drips and bake for 15 minutes at 425°F.",
           },
           {
-            description: "Reduce temperature to 375°F (190°C) and continue baking for 35-40 minutes until crust is golden brown and filling is bubbling.",
+            description:
+              "Reduce temperature to 375°F (190°C) and continue baking for 35-40 minutes until crust is golden brown and filling is bubbling.",
           },
           {
-            description: "If edges brown too quickly, cover with strips of aluminum foil during the last 15 minutes of baking.",
+            description:
+              "If edges brown too quickly, cover with strips of aluminum foil during the last 15 minutes of baking.",
           },
           {
             description: "Cool on a wire rack for at least 2 hours before serving to allow filling to set properly.",
@@ -624,13 +653,15 @@ async function seedData() {
             description: "Heat olive oil in a large pot or Dutch oven over medium heat.",
           },
           {
-            description: "Add diced onion, carrots, and celery. Cook for 5-7 minutes, stirring occasionally, until vegetables begin to soften.",
+            description:
+              "Add diced onion, carrots, and celery. Cook for 5-7 minutes, stirring occasionally, until vegetables begin to soften.",
           },
           {
             description: "Add minced garlic and cook for another minute until fragrant.",
           },
           {
-            description: "Stir in diced tomatoes with their juices, scraping up any browned bits from the bottom of the pot.",
+            description:
+              "Stir in diced tomatoes with their juices, scraping up any browned bits from the bottom of the pot.",
           },
           {
             description: "Pour in vegetable broth and add oregano, basil, and thyme. Bring mixture to a boil.",
@@ -639,7 +670,8 @@ async function seedData() {
             description: "Add green beans and corn to the pot. Reduce heat to medium-low and simmer for 15 minutes.",
           },
           {
-            description: "Add diced zucchini and continue simmering for another 10-15 minutes until all vegetables are tender.",
+            description:
+              "Add diced zucchini and continue simmering for another 10-15 minutes until all vegetables are tender.",
           },
           {
             description: "Season with salt and pepper to taste, adjusting herbs as needed.",
@@ -685,13 +717,15 @@ async function seedData() {
               "Roll lemons on the counter while pressing down to help release more juice, then cut in half and juice them. Strain out seeds but leave pulp for texture.",
           },
           {
-            description: "In a small saucepan, combine 1 cup sugar with 1 cup water. Bring to a boil, stirring until sugar completely dissolves.",
+            description:
+              "In a small saucepan, combine 1 cup sugar with 1 cup water. Bring to a boil, stirring until sugar completely dissolves.",
           },
           {
             description: "Remove from heat and let the simple syrup cool to room temperature, about 30 minutes.",
           },
           {
-            description: "In a large pitcher, combine the fresh lemon juice with the cooled simple syrup and stir well.",
+            description:
+              "In a large pitcher, combine the fresh lemon juice with the cooled simple syrup and stir well.",
           },
           {
             description:
@@ -742,7 +776,8 @@ async function seedData() {
       steps: {
         create: [
           {
-            description: "Preheat oven to 350°F (175°C). Line a 9x5 inch loaf pan with parchment paper or lightly grease.",
+            description:
+              "Preheat oven to 350°F (175°C). Line a 9x5 inch loaf pan with parchment paper or lightly grease.",
           },
           {
             description: "In a small bowl, combine breadcrumbs with milk and let soak for 5 minutes until softened.",
@@ -752,13 +787,15 @@ async function seedData() {
               "In a large mixing bowl, combine ground beef, diced onion, minced garlic, soaked breadcrumbs, eggs, Worcestershire sauce, salt, pepper, and thyme.",
           },
           {
-            description: "Using clean hands or a wooden spoon, gently mix ingredients until just combined. Don't overmix as this will make the meatloaf tough.",
+            description:
+              "Using clean hands or a wooden spoon, gently mix ingredients until just combined. Don't overmix as this will make the meatloaf tough.",
           },
           {
             description: "Transfer meat mixture to prepared loaf pan and shape into an even loaf, smoothing the top.",
           },
           {
-            description: "For the glaze, whisk together ketchup, brown sugar, and Worcestershire sauce in a small bowl.",
+            description:
+              "For the glaze, whisk together ketchup, brown sugar, and Worcestershire sauce in a small bowl.",
           },
           {
             description: "Spread half of the glaze evenly over the top of the raw meatloaf.",
@@ -802,10 +839,12 @@ async function seedData() {
       steps: {
         create: [
           {
-            description: "In a large jar or pitcher, combine coarsely ground coffee with cold water, stirring to ensure all grounds are saturated.",
+            description:
+              "In a large jar or pitcher, combine coarsely ground coffee with cold water, stirring to ensure all grounds are saturated.",
           },
           {
-            description: "Cover and let steep in refrigerator for 12-24 hours for best flavor development. The longer it steeps, the stronger it will be.",
+            description:
+              "Cover and let steep in refrigerator for 12-24 hours for best flavor development. The longer it steeps, the stronger it will be.",
           },
           {
             description:
@@ -815,7 +854,8 @@ async function seedData() {
             description: "The resulting concentrate can be stored in the refrigerator for up to 2 weeks.",
           },
           {
-            description: "To serve, fill glasses with ice cubes and pour coffee concentrate over ice, filling glasses about 2/3 full.",
+            description:
+              "To serve, fill glasses with ice cubes and pour coffee concentrate over ice, filling glasses about 2/3 full.",
           },
           {
             description: "Add cold milk or cream to taste, starting with 2-3 tablespoons and adjusting as desired.",
@@ -884,14 +924,16 @@ async function seedData() {
             description: "Add minced garlic and cook for another minute until fragrant, being careful not to burn it.",
           },
           {
-            description: "Stir in the tomato paste and cook for 2 minutes, stirring constantly, until it darkens slightly and becomes aromatic.",
+            description:
+              "Stir in the tomato paste and cook for 2 minutes, stirring constantly, until it darkens slightly and becomes aromatic.",
           },
           {
             description:
               "Pour in the red wine and scrape up any browned bits from the bottom of the pot. Let the wine simmer and reduce by about half, approximately 5 minutes.",
           },
           {
-            description: "Add the crushed tomatoes, oregano, basil, bay leaves, 1 teaspoon salt, and ½ teaspoon black pepper. Bring to a gentle simmer.",
+            description:
+              "Add the crushed tomatoes, oregano, basil, bay leaves, 1 teaspoon salt, and ½ teaspoon black pepper. Bring to a gentle simmer.",
           },
           {
             description:
@@ -902,7 +944,8 @@ async function seedData() {
               "About 15 minutes before the sauce is done, bring a large pot of salted water to boil and cook spaghetti according to package directions until al dente. Reserve 1 cup pasta water before draining.",
           },
           {
-            description: "Remove bay leaves from the sauce and taste, adjusting seasoning with salt and pepper as needed.",
+            description:
+              "Remove bay leaves from the sauce and taste, adjusting seasoning with salt and pepper as needed.",
           },
           {
             description:
@@ -942,10 +985,12 @@ async function seedData() {
               "Prepare your ingredients by washing the spinach thoroughly and patting it dry. If using fresh pineapple, core and chunk it into 1-inch pieces.",
           },
           {
-            description: "Add the coconut water and honey to your blender first - liquids on the bottom help the blender work more efficiently.",
+            description:
+              "Add the coconut water and honey to your blender first - liquids on the bottom help the blender work more efficiently.",
           },
           {
-            description: "Layer in the spinach, breaking it up with your hands as you add it to help it blend more easily.",
+            description:
+              "Layer in the spinach, breaking it up with your hands as you add it to help it blend more easily.",
           },
           {
             description: "Add the frozen banana (broken into chunks), pineapple pieces, and lime juice if using.",
@@ -962,7 +1007,8 @@ async function seedData() {
               "Stop and scrape down the sides of the blender if needed, then blend again until no green specks remain and the texture is silky smooth.",
           },
           {
-            description: "Taste and adjust sweetness with additional honey if needed, or thin with more coconut water if too thick.",
+            description:
+              "Taste and adjust sweetness with additional honey if needed, or thin with more coconut water if too thick.",
           },
           {
             description:
@@ -1014,7 +1060,8 @@ async function seedData() {
               "Add ground beef and cook, breaking it up with a wooden spoon, until well-browned and cooked through, about 8-10 minutes. Drain excess fat if needed.",
           },
           {
-            description: "Add diced onion and bell pepper to the pot and cook until softened, about 5-7 minutes, stirring occasionally.",
+            description:
+              "Add diced onion and bell pepper to the pot and cook until softened, about 5-7 minutes, stirring occasionally.",
           },
           {
             description: "Add minced garlic and cook for another minute until fragrant.",
@@ -1023,16 +1070,20 @@ async function seedData() {
             description: "Stir in tomato paste and cook for 2 minutes, stirring constantly to prevent burning.",
           },
           {
-            description: "Add chili powder, cumin, paprika, oregano, and cayenne pepper. Stir and cook for 1 minute until spices are fragrant.",
+            description:
+              "Add chili powder, cumin, paprika, oregano, and cayenne pepper. Stir and cook for 1 minute until spices are fragrant.",
           },
           {
-            description: "Pour in diced tomatoes, tomato sauce, and beef broth. Stir in kidney beans and bring mixture to a boil.",
+            description:
+              "Pour in diced tomatoes, tomato sauce, and beef broth. Stir in kidney beans and bring mixture to a boil.",
           },
           {
-            description: "Reduce heat to low, partially cover, and simmer for 45 minutes to 1 hour, stirring occasionally, until chili has thickened.",
+            description:
+              "Reduce heat to low, partially cover, and simmer for 45 minutes to 1 hour, stirring occasionally, until chili has thickened.",
           },
           {
-            description: "Season with salt and pepper to taste. Serve hot with shredded cheese, sour cream, chopped green onions, and cornbread.",
+            description:
+              "Season with salt and pepper to taste. Serve hot with shredded cheese, sour cream, chopped green onions, and cornbread.",
           },
         ],
       },
@@ -1069,29 +1120,35 @@ async function seedData() {
             description: "Preheat oven to 350°F (175°C). Grease a 9x5 inch loaf pan or line with parchment paper.",
           },
           {
-            description: "In a large mixing bowl, mash the ripe bananas with a fork until mostly smooth with just a few small lumps remaining.",
+            description:
+              "In a large mixing bowl, mash the ripe bananas with a fork until mostly smooth with just a few small lumps remaining.",
           },
           {
             description: "Stir the melted butter into the mashed bananas until well combined.",
           },
           {
-            description: "Mix in sugar, beaten egg, and vanilla extract until the mixture is smooth and well incorporated.",
+            description:
+              "Mix in sugar, beaten egg, and vanilla extract until the mixture is smooth and well incorporated.",
           },
           {
             description: "Sprinkle baking soda and salt over the mixture and stir until evenly distributed.",
           },
           {
-            description: "Add flour and gently fold in with a wooden spoon until just combined. Don't overmix - a few flour streaks are okay.",
+            description:
+              "Add flour and gently fold in with a wooden spoon until just combined. Don't overmix - a few flour streaks are okay.",
           },
           { description: "If using walnuts, fold them in gently at this stage." },
           {
-            description: "Pour batter into the prepared loaf pan and spread evenly. Tap the pan gently on the counter to release air bubbles.",
+            description:
+              "Pour batter into the prepared loaf pan and spread evenly. Tap the pan gently on the counter to release air bubbles.",
           },
           {
-            description: "Bake for 55-65 minutes, until a toothpick inserted in the center comes out clean or with just a few moist crumbs.",
+            description:
+              "Bake for 55-65 minutes, until a toothpick inserted in the center comes out clean or with just a few moist crumbs.",
           },
           {
-            description: "Cool in the pan for 10 minutes, then turn out onto a wire rack to cool completely before slicing.",
+            description:
+              "Cool in the pan for 10 minutes, then turn out onto a wire rack to cool completely before slicing.",
           },
         ],
       },
@@ -1132,25 +1189,29 @@ async function seedData() {
               "Prepare all vegetables by washing and cutting tomatoes into wedges, cucumber into thick rounds, red onion into thin slices, and bell pepper into strips.",
           },
           {
-            description: "Arrange the cut vegetables in a large serving bowl or on a platter, distributing colors evenly for visual appeal.",
+            description:
+              "Arrange the cut vegetables in a large serving bowl or on a platter, distributing colors evenly for visual appeal.",
           },
           {
             description: "Scatter the Kalamata olives and cubed feta cheese over the vegetables.",
           },
           {
-            description: "In a small bowl, whisk together olive oil, fresh lemon juice, oregano, salt, and black pepper until well combined.",
+            description:
+              "In a small bowl, whisk together olive oil, fresh lemon juice, oregano, salt, and black pepper until well combined.",
           },
           {
             description: "Drizzle the dressing evenly over the salad just before serving.",
           },
           {
-            description: "Gently toss the salad with clean hands or salad servers to coat all ingredients with dressing.",
+            description:
+              "Gently toss the salad with clean hands or salad servers to coat all ingredients with dressing.",
           },
           {
             description: "Garnish with fresh parsley and serve immediately at room temperature.",
           },
           {
-            description: "For best flavor, let the salad sit for 10-15 minutes after dressing to allow flavors to meld together.",
+            description:
+              "For best flavor, let the salad sit for 10-15 minutes after dressing to allow flavors to meld together.",
           },
         ],
       },
@@ -1185,31 +1246,37 @@ async function seedData() {
       steps: {
         create: [
           {
-            description: "Allow bread slices to sit out for 30 minutes to slightly stale, or lightly toast them for 1-2 minutes to remove excess moisture.",
+            description:
+              "Allow bread slices to sit out for 30 minutes to slightly stale, or lightly toast them for 1-2 minutes to remove excess moisture.",
           },
           {
             description:
               "In a shallow dish large enough for dipping bread, whisk together eggs, milk, heavy cream, sugar, vanilla, cinnamon, and salt until smooth and well combined.",
           },
           {
-            description: "Heat a large skillet or griddle over medium heat and add 1 tablespoon of butter, allowing it to melt and coat the surface.",
+            description:
+              "Heat a large skillet or griddle over medium heat and add 1 tablespoon of butter, allowing it to melt and coat the surface.",
           },
           {
             description:
               "Working with one slice at a time, dip bread into the custard mixture, allowing each side to soak for 20-30 seconds. Don't oversoak or bread will fall apart.",
           },
           {
-            description: "Lift the soaked bread slice, allowing excess custard to drip off, and place immediately in the heated skillet.",
+            description:
+              "Lift the soaked bread slice, allowing excess custard to drip off, and place immediately in the heated skillet.",
           },
           {
-            description: "Cook for 2-3 minutes on the first side until golden brown and slightly crispy, then flip and cook for another 2-3 minutes.",
+            description:
+              "Cook for 2-3 minutes on the first side until golden brown and slightly crispy, then flip and cook for another 2-3 minutes.",
           },
           {
-            description: "Transfer cooked French toast to a warm plate and repeat with remaining slices, adding more butter to the pan as needed.",
+            description:
+              "Transfer cooked French toast to a warm plate and repeat with remaining slices, adding more butter to the pan as needed.",
           },
           { description: "Keep finished slices warm in a 200°F oven while cooking the rest." },
           {
-            description: "Serve immediately with warm maple syrup, fresh berries, and a dusting of powdered sugar if desired.",
+            description:
+              "Serve immediately with warm maple syrup, fresh berries, and a dusting of powdered sugar if desired.",
           },
         ],
       },
@@ -1248,35 +1315,44 @@ async function seedData() {
       steps: {
         create: [
           {
-            description: "Slice chicken breast into thin, uniform strips against the grain for tenderness. Pat dry with paper towels.",
+            description:
+              "Slice chicken breast into thin, uniform strips against the grain for tenderness. Pat dry with paper towels.",
           },
           {
-            description: "In a small bowl, whisk together soy sauce, oyster sauce, cornstarch, and sesame oil to create the stir fry sauce. Set aside.",
+            description:
+              "In a small bowl, whisk together soy sauce, oyster sauce, cornstarch, and sesame oil to create the stir fry sauce. Set aside.",
           },
           {
-            description: "Heat 1 tablespoon of vegetable oil in a large wok or skillet over high heat until shimmering.",
+            description:
+              "Heat 1 tablespoon of vegetable oil in a large wok or skillet over high heat until shimmering.",
           },
           {
-            description: "Add chicken pieces in a single layer, being careful not to overcrowd. Cook for 2-3 minutes without stirring to develop browning.",
+            description:
+              "Add chicken pieces in a single layer, being careful not to overcrowd. Cook for 2-3 minutes without stirring to develop browning.",
           },
           {
-            description: "Stir-fry chicken for another 2-3 minutes until cooked through and no longer pink. Remove chicken to a plate.",
+            description:
+              "Stir-fry chicken for another 2-3 minutes until cooked through and no longer pink. Remove chicken to a plate.",
           },
           {
             description:
               "Add remaining oil to the same pan and immediately add bell peppers, snap peas, and broccoli. Stir-fry for 3-4 minutes until vegetables are crisp-tender.",
           },
           {
-            description: "Create a well in the center of vegetables and add minced garlic and ginger. Cook for 30 seconds until fragrant.",
+            description:
+              "Create a well in the center of vegetables and add minced garlic and ginger. Cook for 30 seconds until fragrant.",
           },
           {
-            description: "Return chicken to the pan and pour the prepared sauce over everything. Toss quickly to coat all ingredients evenly.",
+            description:
+              "Return chicken to the pan and pour the prepared sauce over everything. Toss quickly to coat all ingredients evenly.",
           },
           {
-            description: "Cook for another 1-2 minutes until sauce has thickened slightly and everything is heated through.",
+            description:
+              "Cook for another 1-2 minutes until sauce has thickened slightly and everything is heated through.",
           },
           {
-            description: "Remove from heat, garnish with chopped green onions, and serve immediately over steamed rice.",
+            description:
+              "Remove from heat, garnish with chopped green onions, and serve immediately over steamed rice.",
           },
         ],
       },

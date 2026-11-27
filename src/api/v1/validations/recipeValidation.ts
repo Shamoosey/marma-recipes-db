@@ -17,5 +17,4 @@ export const recipeSchema = Joi.object({
   cloudinaryId: Joi.any().optional(),
   imageBase64: Joi.any().optional(),
   likeCount: Joi.any().optional(),
-  sendNotification: Joi.any().optional(),
 });
