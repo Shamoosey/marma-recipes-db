@@ -8,7 +8,7 @@ export interface RecipeDto {
   recipeTypeId: string;
 
   imageUrl?: string;
-  cloudinaryId?: string;
+  imageKey?: string;
 
   ingredients: string[];
   steps: string[];

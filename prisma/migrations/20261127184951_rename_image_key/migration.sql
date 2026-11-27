@@ -1,0 +1,1 @@
+ALTER TABLE "Recipe" RENAME COLUMN "cloudinaryId" TO "imageKey";
