@@ -37,7 +37,7 @@ model Recipe {
   createdAt      DateTime @default(now())
 
   imageUrl       String?
-  cloudinaryId   String?
+  imageKey       String?
   
   recipeTypeId   String
   recipeType     RecipeType @relation(fields: [recipeTypeId], references: [id])

@@ -1,7 +1,7 @@
 import prisma from "../../../../prisma/client";
 import { RecipeCommentDto } from "../types/recipeCommentDto";
 import { RecipeDto } from "../types/recipeDto";
-import { CloudinaryService } from "./cloudinaryService";
+import * as UploadService from "./uploadService";
 
 const recipeInclude = {
   ingredients: true,
@@ -15,19 +15,10 @@ const recipeInclude = {
   },
 };
 
-const handleImageUpload = async (
-  imageBase64?: string,
-  publicId?: string,
-): Promise<{ imageUrl?: string; cloudinaryId?: string }> => {
-  if (!imageBase64) {
-    return {};
-  }
+const removeStoredImage = async (imageKey?: string | null, imageUrl?: string | null): Promise<void> => {
+  if (!imageKey) return;
 
-  const result = await CloudinaryService.uploadImage(imageBase64, "recipes", publicId);
-  return {
-    imageUrl: result.secure_url,
-    cloudinaryId: result.public_id,
-  };
+  await UploadService.deleteImage(imageKey);
 };
 
 const formatRecipeData = (data: any): RecipeDto => {
@@ -123,25 +114,29 @@ export const toggleUserSavedRecipe = async (recipeId: string, userId: string): P
   }
 };
 
-export const createRecipe = async (
-  recipeDto: RecipeDto,
-  createUserId: string,
-  imageBase64?: string,
-): Promise<RecipeDto> => {
-  const { ingredients, steps, comments, updatedAt, createdAt, userId, user, imageUrl, cloudinaryId, ...recipeData } =
-    recipeDto;
+export const createRecipe = async (recipeDto: RecipeDto, createUserId: string): Promise<RecipeDto> => {
+  const {
+    id,
+    ingredients,
+    steps,
+    comments,
+    likeCount,
+    updatedAt,
+    createdAt,
+    userId,
+    user,
+    imageUrl,
+    imageKey,
+    ...recipeData
+  } = recipeDto;
 
-  const { imageUrl: uploadedImageUrl, cloudinaryId: uploadedCloudinaryId } = await handleImageUpload(
-    imageBase64,
-    cloudinaryId,
-  );
+  const image = UploadService.resolveImage(createUserId, imageKey);
 
   const data = await prisma.recipe.create({
     data: {
       ...recipeData,
+      ...image,
       userId: createUserId,
-      imageUrl: uploadedImageUrl,
-      cloudinaryId: uploadedCloudinaryId,
       ingredients: {
         createMany: {
           data: ingredients.map((description) => ({ description })),
@@ -155,60 +150,57 @@ export const createRecipe = async (
     },
     include: { ...recipeInclude, recipeType: true },
   });
-  const recipe = formatRecipeData(data);
-  return recipe;
+  return formatRecipeData(data);
 };
 
-export const updateRecipe = async (id: string, recipeDto: RecipeDto, imageBase64?: string): Promise<RecipeDto> => {
-  const { ingredients, steps, comments, updatedAt, likeCount, createdAt, imageUrl, user, cloudinaryId, ...recipeData } =
-    recipeDto;
+export const updateRecipe = async (id: string, recipeDto: RecipeDto): Promise<RecipeDto> => {
+  const {
+    id: _id,
+    ingredients,
+    steps,
+    comments,
+    likeCount,
+    updatedAt,
+    createdAt,
+    userId,
+    user,
+    imageUrl,
+    imageKey,
+    ...recipeData
+  } = recipeDto;
 
-  const existingRecipe = await prisma.recipe.findUnique({ where: { id } });
+  const existing = await prisma.recipe.findUniqueOrThrow({ where: { id } });
 
-  let uploadedImageUrl = imageUrl;
-  let uploadedCloudinaryId = existingRecipe?.cloudinaryId;
+  // Unchanged images (including old Cloudinary ones) are left as they are
+  const imageChanged = (imageKey ?? null) !== existing.imageKey;
+  const image = imageChanged ? UploadService.resolveImage(existing.userId, imageKey) : {};
 
-  if (imageBase64) {
-    const result = await handleImageUpload(imageBase64, cloudinaryId);
-    uploadedImageUrl = result.imageUrl;
-    uploadedCloudinaryId = result.cloudinaryId;
-  }
   const data = await prisma.recipe.update({
     where: { id },
     data: {
       ...recipeData,
-      ...(uploadedCloudinaryId && { cloudinaryId: uploadedCloudinaryId }),
-      imageUrl: uploadedImageUrl ?? null,
+      ...image,
       ingredients: {
         deleteMany: {},
         createMany: {
-          data: ingredients.map((x) => ({ description: x })),
+          data: ingredients.map((description) => ({ description })),
         },
       },
       steps: {
         deleteMany: {},
         createMany: {
-          data: steps.map((x) => ({ description: x })),
+          data: steps.map((description) => ({ description })),
         },
       },
     },
     include: { ...recipeInclude, recipeType: true },
   });
+
   const { recipeType, ...updatedRecipe } = data;
-  const recipe = formatRecipeData(updatedRecipe);
-  return recipe;
+  return formatRecipeData(updatedRecipe);
 };
 
 export const deleteRecipe = async (id: string): Promise<void> => {
-  const existingRecipe = await prisma.recipe.findUnique({ where: { id } });
-
-  if (existingRecipe?.cloudinaryId) {
-    await CloudinaryService.deleteImage(existingRecipe.cloudinaryId);
-  }
-
-  await prisma.recipe.delete({
-    where: {
-      id: id,
-    },
-  });
+  const deleted = await prisma.recipe.delete({ where: { id } });
+  await removeStoredImage(deleted.imageKey, deleted.imageUrl);
 };
